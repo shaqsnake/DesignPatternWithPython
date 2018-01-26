@@ -1,30 +1,33 @@
-class Singleton(object):
+#coding=utf-8
+class Singleton:
+    """单列类
     """
-    """
-    class _A(object):
-        def __init__(self):
-            pass
-                
-        def display(self):
-            """
-            :return 
-            """
-            return id(self)
+    class __MyClass:
+        """实际生成实例的类
+        """
+        def __init__(self, arg):
+            """初始化并赋值"""
+            self.foo = arg
 
-    _instance = None
-    
-    def __init__(self):
-        """
-        """
-        if Singleton._instance is None:
-            Singleton._instance = Singleton._A()
+        def display(self):
+            """返回实例的id和属性值"""
+            return (id(self), self.foo)
+
+    # 类属性
+    __instance = None
+    def __init__(self, arg):
+        if not Singleton.__instance:
+            Singleton.__instance = Singleton.__MyClass(arg)
+        else:
+            Singleton.__instance.foo = arg
 
     def __getattr__(self, attr):
-        return getattr(self._instance, attr)
+        return getattr(self.__instance, attr)
+
 
 if __name__ == "__main__":
-    s1 = Singleton()
-    s2 = Singleton()
-    print(id(s1), s1.display())
-    print(id(s2), s2.display())
-
+    """测试"""
+    s1 = Singleton("bar")
+    s2 = Singleton("zoo")
+    print(s1.display())
+    print(s2.display())

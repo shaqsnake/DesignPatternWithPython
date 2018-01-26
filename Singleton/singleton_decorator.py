@@ -1,5 +1,5 @@
 class Singleton:
-    """
+    """单例类
     """
 
     def __init__(self, cls):
@@ -21,8 +21,8 @@ class Singleton:
         return isinstance(inst, self._decorated)
 
 @Singleton
-class A:
-    """
+class MyClass:
+    """实际生成实例的类
     """
     def __init__(self):
         pass
@@ -31,8 +31,8 @@ class A:
         return id(self)
 
 if __name__ == "__main__":
-    s1 = A.Instance()
-    s2 = A.Instance()
+    s1 = MyClass.Instance()
+    s2 = MyClass.Instance()
     print(s1, s1.display())
     print(s2, s2.display())
     print(s1 is s2)
