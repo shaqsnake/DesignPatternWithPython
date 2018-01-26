@@ -14,15 +14,15 @@ class Singleton:
             return (id(self), self.foo)
 
     # 类属性
-    __instance = None
+    _instance = None
     def __init__(self, arg):
-        if not Singleton.__instance:
-            Singleton.__instance = Singleton.__MyClass(arg)
+        if not Singleton._instance:
+            Singleton._instance = Singleton.__MyClass(arg)
         else:
-            Singleton.__instance.foo = arg
+            Singleton._instance.foo = arg
 
     def __getattr__(self, attr):
-        return getattr(self.__instance, attr)
+        return getattr(self._instance, attr)
 
 
 if __name__ == "__main__":
