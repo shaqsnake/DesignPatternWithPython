@@ -1,38 +1,34 @@
-class Singleton:
-    """单例类
-    """
+#coding=utf-8
+def singleton(cls):
+    instances = {}
+    def wrapper(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return wrapper
 
-    def __init__(self, cls):
-        self._cls = cls
-
-    def Instance(self):
-        """
-        """
-        try:
-            return self._instance
-        except AttributeError:
-            self._instance = self._cls()
-            return self._instance
-
-    def __call__(self):
-        raise TypeError('Singleton must be accessed throug `Instance()`.')
-
-    def __instancecheck__(self, inst):
-        return isinstance(inst, self._decorated)
-
-@Singleton
+@singleton
 class MyClass:
     """实际生成实例的类
     """
-    def __init__(self):
-        pass
-
+    foo = "foo"
     def display(self):
-        return id(self)
+        return (id(self))
+
+@singleton
+class OtherClass:
+    """另一个类
+    """
+    pass
 
 if __name__ == "__main__":
-    s1 = MyClass.Instance()
-    s2 = MyClass.Instance()
-    print(s1, s1.display())
-    print(s2, s2.display())
-    print(s1 is s2)
+    s1 = MyClass()
+    s1.foo = "bar"
+    print(s1.display(), s1.foo)
+    s2 = MyClass()
+    s2.foo = "zoo"
+    print(s2.display(), s2.foo)
+    assert s1 is s2
+    s3 = OtherClass()
+    s4 = OtherClass()
+    assert s3 is s4

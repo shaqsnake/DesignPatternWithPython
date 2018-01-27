@@ -1,6 +1,7 @@
 #coding=utf-8
 class Singleton(object):
-    """单例类"""
+    """单例类
+    """
     _instance = None
 
     def __new__(cls, *args, **kwargs):
