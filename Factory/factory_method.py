@@ -14,21 +14,13 @@ class BMW(object):
     def __repr__(self):
         return "BMW"
 
-class AbstractFactory(object):
-    """抽象工厂
-    """
-    __metaclass__ = abc.ABCMeta
-    @abc.abstractmethod
-    def product_car(self):
-        pass
-
-class MecedesFactory(AbstractFactory):
+class MecedesFactory(object):
     """梅赛德斯工厂
     """
     def product_car(self):
         return Mercedes()
 
-class BMWFactory(AbstractFactory):
+class BMWFactory(object):
     """宝马工厂
     """
     def product_car(self):
