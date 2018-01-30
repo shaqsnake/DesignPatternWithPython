@@ -1,4 +1,7 @@
 #coding=utf-8
+import abc
+
+
 class Mercedes(object):
     """梅赛德斯
     """
@@ -11,13 +14,22 @@ class BMW(object):
     def __repr__(self):
         return "BMW"
 
-class MercedesFactory(object):
+class AbstractFactory(object):
+    """抽象工厂
+    """
+    __metaclass__ = abc.ABCMeta
+
+    @abc.abstractmethod
+    def product_car(self):
+        pass
+
+class MercedesFactory(AbstractFactory):
     """梅赛德斯工厂
     """
     def product_car(self):
         return Mercedes()
 
-class BMWFactory(object):
+class BMWFactory(AbstractFactory):
     """宝马工厂
     """
     def product_car(self):
