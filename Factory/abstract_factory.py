@@ -41,7 +41,7 @@ class AbstractFactory(object):
     def product_suv(self):
         pass
 
-class MecedesFactory(AbstractFactory):
+class MercedesFactory(AbstractFactory):
     """梅赛德斯工厂
     """
     def product_car(self):
@@ -59,21 +59,11 @@ class BMWFactory(AbstractFactory):
     def product_suv(self):
         return BMW_X5()
 
-class Factory(object):
-    @staticmethod
-    def get_factory(name):
-        if name == 'mf':
-            return MecedesFactory()
-        elif name == 'bf':
-            return BMWFactory()
-        raise TypeError("Unkonwn Factory")
 
 if __name__ == '__main__':
-    f1 = Factory.get_factory('mf')
-    c1 = f1.product_car()
-    s1 = f1.product_suv()
+    c1 = MercedesFactory().product_car()
+    s1 = MercedesFactory().product_suv()
     print(c1, s1)
-    f2 = Factory.get_factory('bf')
-    s2 = f2.product_suv()
-    c2 = f2.product_car()
+    s2 = BMWFactory().product_suv()
+    c2 = BMWFactory().product_car()
     print(c2, s2)
